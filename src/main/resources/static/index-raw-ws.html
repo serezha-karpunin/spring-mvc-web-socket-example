@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Raw WS example</title>
+</head>
+<body>
+Raw WS example. LOG:
+<div id="text-holder"/>
+<script>
+let socket = new WebSocket("ws://localhost:8080/raw-ws-handler")
+socket.onopen = function(e) {
+    console.log("socket connected")
+    socket.send('new user connected at ' + new Date() + '\n')
+}
+
+socket.onmessage = function(e) {
+    let paragraph = document.createElement('p')
+    paragraph.textContent = e.data
+
+    let node = document.getElementById('text-holder')
+    node.appendChild(paragraph)
+}
+</script>
+</body>
+</html>
